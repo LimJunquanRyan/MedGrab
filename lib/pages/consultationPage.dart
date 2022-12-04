@@ -62,9 +62,11 @@ class consultationPage extends StatelessWidget {
                   ),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'What is your name?: ',
+                    //Name
+                    const Text(
+                      'What is your name? ',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -100,9 +102,10 @@ class consultationPage extends StatelessWidget {
                         }
                       },
                     ),
-                    SizedBox(height: 7,),
+                    const SizedBox(height: 7,),
+                    //Reason for consultation
                     const Text(
-                      'Reason for consulation: ',
+                      'Reason for consultation: ',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 15,
@@ -140,8 +143,72 @@ class consultationPage extends StatelessWidget {
                         }
                       },
                     ),
+                    const SizedBox(height: 7,),
+                    //Have allergies or not
+                    const Text(
+                      'Do you have any allergies? ',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 3,),
+                    RadioListTile(
+                        title: const Text('Yes'),
+                        value: true,
+                        groupValue: bool,
+                        onChanged: (value){
+                          // setState((){
+                          //   //gender = value.toString();
+                          // });
+                        },
+                    ),
+                    RadioListTile(
+                      title: const Text('No'),
+                      value: true,
+                      groupValue: bool,
+                      onChanged: (value){
+                        // setState((){
+                        //   gender = value.toString();
+                        // });
+                      },
+                    ),
+                    const SizedBox(height: 7,),
+                    //Have allergies or not
+                    const Text(
+                      'Do you have any pre-existing conditions? ',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 3,),
+                    RadioListTile(
+                      title: const Text('Yes'),
+                      value: true,
+                      groupValue: bool,
+                      onChanged: (value){
+                        // setState((){
+                        //   //gender = value.toString();
+                        // });
+                      },
+                    ),
                   ],
                 ),
+              ),
+              const SizedBox(height: 20,),
+              FloatingActionButton.extended(
+                backgroundColor: Color.fromRGBO(48, 156, 255, 1.0),
+                foregroundColor: Colors.white,
+                onPressed:(){
+                    //Do actions
+                },
+                label: const Text('Continue  > '),
+
               ),
             ],
           ),
