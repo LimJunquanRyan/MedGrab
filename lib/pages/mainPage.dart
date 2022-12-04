@@ -19,7 +19,7 @@ class mainPage extends StatelessWidget {
               child: Card(
                 child: Column(
                   children: <Widget>[
-                    TextButton(onPressed: () {  }, child: ListTile(title: Text("Book an online consultation"), subtitle: Text(""),)),
+                    TextButton(onPressed: () { Navigator.pushNamed(context, base.MAPSPAGE); }, child: ListTile(title: Text("Book an online consultation"), subtitle: Text(""),)),
                   ],
                 ),
               ),

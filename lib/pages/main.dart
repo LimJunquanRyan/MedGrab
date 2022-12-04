@@ -4,6 +4,8 @@ import 'package:medgrab/pages/mainPage.dart';
 import 'package:medgrab/pages/summaryPage1.dart';
 import 'package:medgrab/pages/summaryPage2.dart';
 
+import 'mapsPage.dart';
+
 void main() {
   runApp(base());
 }
@@ -13,7 +15,7 @@ class base extends StatelessWidget {
   static const LIVEREADING  = '/liveReading';
   static const SUMMARYPAGE1 = '/summaryPage1';
   static const SUMMARYPAGE2 = '/summaryPage2';
-
+  static const MAPSPAGE = 'lib/pages/Maps/mapsPage.dart';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,6 +26,7 @@ class base extends StatelessWidget {
         LIVEREADING: (context) => liveReading(),
         SUMMARYPAGE1: (context) => summaryPage1(),
         SUMMARYPAGE2: (context) => summaryPage2(),
+        MAPSPAGE: (context) => mapsPage(),
       },
       theme: ThemeData(
           primarySwatch: Colors.grey,
