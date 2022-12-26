@@ -106,6 +106,7 @@ class mapsPage extends StatelessWidget {
            ],
          ),
       ),
+      bottomNavigationBar: bottomAppBar(),
     );
   }
 }

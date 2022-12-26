@@ -10,12 +10,14 @@ class liveReading extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(13.0, 23.0, 13.0, 0.0),
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.14),
+              width: MediaQuery.of(context).size.width * 0.935,
+              height: MediaQuery.of(context).size.height * 0.19,
               alignment: Alignment.center,
               child: Card(
                 child: Column(
                   children: <Widget>[
-                    TextButton(onPressed: () { Navigator.pushNamed(context, base.SUMMARYPAGE1); }, child: ListTile(title: Text("Take a live reading"), subtitle: Text("from MedGrab"),)),
+                    Expanded(child: TextButton(onPressed: () { Navigator.pushNamed(context, base.SUMMARYPAGE); }, child: ListTile(title: Text("Take a live reading", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)), subtitle: Text("from MedGrab", style: TextStyle(fontSize: 15),),))),
                   ],
                 ),
               ),

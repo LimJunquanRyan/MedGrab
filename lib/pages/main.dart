@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medgrab/pages/consultationPage.dart';
 import 'package:medgrab/pages/liveReading.dart';
 import 'package:medgrab/pages/mainPage.dart';
-import 'package:medgrab/pages/summaryPage1.dart';
-import 'package:medgrab/pages/summaryPage2.dart';
+import 'package:medgrab/pages/summaryPage.dart';
 
 import 'mapsPage.dart';
 
@@ -13,9 +13,10 @@ void main() {
 class base extends StatelessWidget {
   static const MAINPAGE = '/';
   static const LIVEREADING  = '/liveReading';
-  static const SUMMARYPAGE1 = '/summaryPage1';
-  static const SUMMARYPAGE2 = '/summaryPage2';
-  static const MAPSPAGE = 'lib/pages/Maps/mapsPage.dart';
+  static const SUMMARYPAGE = '/summaryPage';
+  static const MAPSPAGE = '/mapsPage';
+  static const CONSULTATIONPAGE = '/consultationPage';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,16 +25,17 @@ class base extends StatelessWidget {
       routes: {
         MAINPAGE: (context) => mainPage(),
         LIVEREADING: (context) => liveReading(),
-        SUMMARYPAGE1: (context) => summaryPage1(),
-        SUMMARYPAGE2: (context) => summaryPage2(),
+        SUMMARYPAGE: (context) => summaryPage1(),
         MAPSPAGE: (context) => mapsPage(),
+        CONSULTATIONPAGE: (context) => consultationPage(),
       },
+      onGenerateRoute: (settings) {},
       theme: ThemeData(
-          primarySwatch: Colors.grey,
-          bottomAppBarTheme: BottomAppBarTheme(color: Colors.black, shape: CircularNotchedRectangle()),
-          textButtonTheme: TextButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFF78B59F)),)),
-          //textStyle: MaterialStatePropertyAll<TextStyle>(TextStyle(fontSize: 32.0, fontWeight: FontWeight.w700, color: Colors.white,))
-          iconTheme: IconThemeData(color: Color(0xFF78B59F)),
+        primarySwatch: Colors.grey,
+        bottomAppBarTheme: BottomAppBarTheme(color: Colors.black, shape: CircularNotchedRectangle()),
+        textButtonTheme: TextButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Color(0xFF78B59F)),),),
+        //textStyle: MaterialStatePropertyAll<TextStyle>(TextStyle(fontSize: 32.0, fontWeight: FontWeight.w700, color: Colors.white,))
+        iconTheme: IconThemeData(color: Color(0xFF78B59F)),
         listTileTheme: ListTileThemeData(textColor: Colors.white),
       ),
     );

@@ -214,6 +214,7 @@ class consultationPage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: bottomAppBar(),
     );
   }
 }
