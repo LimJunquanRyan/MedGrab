@@ -48,7 +48,7 @@ class mainPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width * 0.025))),
                       child: Column(
                         children: <Widget>[
-                          Expanded(child: TextButton(onPressed: () {  }, child: ListTile(title: Text("View medical records", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),), subtitle: Text("Last record:", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 13),),))),
+                          Expanded(child: TextButton(onPressed: () { Navigator.pushNamed(context, base.PASTMEDPAGE); }, child: ListTile(title: Text("View medical records", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),), subtitle: Text("Last record:", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 13),),))),
                         ],
                       ),
                     ),

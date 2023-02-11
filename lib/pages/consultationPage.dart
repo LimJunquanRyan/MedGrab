@@ -90,7 +90,7 @@ class consultationPageState extends State<consultationPage>{
               const SizedBox(height: 20,),
               Container(
                 padding:  const EdgeInsets.only(left: 15, top: 10,right: 15),
-                height: MediaQuery.of(context).size.height / 1.65,
+                height: MediaQuery.of(context).size.height / 1.8,
                 width: MediaQuery.of(context).size.width / 1.11,
                 decoration:  const BoxDecoration(
                   color: Color.fromRGBO(120, 181, 159, 1.0),
