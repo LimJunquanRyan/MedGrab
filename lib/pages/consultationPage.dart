@@ -1,12 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:medgrab/components/bottomAppBar.dart';
 
-class consultationPage extends StatelessWidget {
+class consultationPage extends StatefulWidget {
   const consultationPage({Key? key}) : super(key: key);
+  @override
+  consultationPageState createState() => consultationPageState();
+
+}
+
+class consultationPageState extends State<consultationPage>{
+  final _formKey = GlobalKey<FormState>();
+
+  //String _name;
+  //String _gender;
+  int ifAllergyRadioButton = 0;
+  int ifPreExConditions = 0;
 
   @override
-  Widget build(BuildContext context) {
+  void initState(){
+    ifAllergyRadioButton = 0;
+    ifPreExConditions = 0;
+    super.initState();
+  }
 
+  void _handleAllergyChange(int? value){
+    if (value == null) {
+      return;
+    } else{
+      setState(() {
+        ifAllergyRadioButton = value;
+      });
+    }
+  }
+  void _handlePreExCondChange(int? value){
+    if (value == null) {
+      return;
+    } else{
+      setState(() {
+        ifPreExConditions= value;
+      });
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
@@ -16,39 +52,40 @@ class consultationPage extends StatelessWidget {
       body: Container(
         padding:  const EdgeInsets.only(top: 20,),
         child: SingleChildScrollView(
+          key: _formKey,
           child: Column(
             children: [
               Container(
-                alignment: Alignment.center,
-                child: Column(
-                  children: const [
-                    Text(
-                      'Hi {user}, thank you for choosing MedGrab',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: const [
+                      Text(
+                        'Hi David, thank you for choosing MedGrab',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20,),
-                    Text(
-                      'To allow us to better serve your needs',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
+                      SizedBox(height: 20,),
+                      Text(
+                        'To allow us to better serve your needs',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20,),
+                      SizedBox(height: 20,),
 
-                    Text(
-                      'please fill in the following details.',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
+                      Text(
+                        'please fill in the following details.',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                  ],
-                )
+                    ],
+                  )
               ),
               const SizedBox(height: 20,),
               Container(
@@ -63,47 +100,53 @@ class consultationPage extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+
                   children: [
-                    //Name
                     const Text(
                       'What is your name? ',
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 3,),
-                    TextFormField(
-                      style: const TextStyle(fontSize: 15),
-                      decoration: InputDecoration(
-                        hintText: 'Eg. David Tham Boon Keng',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
+                    Column(
+                      children:[
+                        //Name
+                        const SizedBox(height: 3,),
+                        TextFormField(
+                          style: const TextStyle(fontSize: 15),
+                          decoration: InputDecoration(
+                            hintText: 'Eg. David Tham Boon Keng',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                  color: Colors.pink,
+                                  width: 2.0,
+                                )
+                            ),
+                            filled: true,
+                            fillColor: const Color.fromRGBO(192, 212, 204, 1),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                          ),
+                          //OnSaved, used to run code when user saves the form
+                          //onSaved: (String? value){},
+                          validator: (String? value){
+                            if(value == null){
+                              return "Name cannot be empty";
+                            }else if(!RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+                              return "Invalid Name format";
+                            }else {
+                              return null;
+                            }
+                          },
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Colors.pink,
-                            width: 2.0,
-                          )
-                        ),
-                        filled: true,
-                        fillColor: const Color.fromRGBO(192, 212, 204, 1),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                      ),
-                      //OnSaved, used to run code when user saves the form
-                      //onSaved: (String? value){},
-                      validator: (String? value){
-                        if(value != null || RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
-                          return "Invalid Name format";
-                        }else {
-                          return null;
-                        }
-                      },
+                      ],
                     ),
-                    const SizedBox(height: 7,),
-                    //Reason for consultation
                     const Text(
                       'Reason for consultation: ',
                       textAlign: TextAlign.left,
@@ -113,36 +156,43 @@ class consultationPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 3,),
-                    TextFormField(
-                      style: const TextStyle(fontSize: 15),
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        hintText: 'Eg. I have cough, flue and fever recently',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
+                    Column(
+                      children: [
+                        const SizedBox(height: 7,),
+                        //Reason for consultation
+                        const SizedBox(height: 3,),
+                        TextFormField(
+                          style: const TextStyle(fontSize: 15),
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                            hintText: 'Eg. I have cough, flue and fever recently',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: const BorderSide(
+                                  color: Colors.pink,
+                                  width: 2.0,
+                                )
+                            ),
+                            filled: true,
+                            fillColor: const Color.fromRGBO(192, 212, 204, 1),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                          ),
+                          //OnSaved, used to run code when user saves the form
+                          //onSaved: (String? value){},
+                          validator: (String? value){
+                            if(value != null || RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
+                              return "Invalid Name format";
+                            }else {
+                              return null;
+                            }
+                          },
                         ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: Colors.pink,
-                              width: 2.0,
-                            )
-                        ),
-                        filled: true,
-                        fillColor: const Color.fromRGBO(192, 212, 204, 1),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                      ),
-                      //OnSaved, used to run code when user saves the form
-                      //onSaved: (String? value){},
-                      validator: (String? value){
-                        if(value != null || RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
-                          return "Invalid Name format";
-                        }else {
-                          return null;
-                        }
-                      },
+                      ],
                     ),
+
                     const SizedBox(height: 7,),
                     //Have allergies or not
                     const Text(
@@ -154,26 +204,78 @@ class consultationPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 3,),
-                    RadioListTile(
-                        title: const Text('Yes'),
-                        value: true,
-                        groupValue: bool,
-                        onChanged: (value){
-                          // setState((){
-                          //   //gender = value.toString();
-                          // });
-                        },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: 3,),
+                        Radio(
+                          value: 1,
+                          groupValue: ifAllergyRadioButton,
+                          activeColor: Colors.blue,
+                          onChanged: _handleAllergyChange,
+                        ),
+                        const Text(
+                            'Yes',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Radio(
+                          value: 2,
+                          groupValue: ifAllergyRadioButton,
+                          activeColor: Colors.blue,
+                          onChanged: _handleAllergyChange,
+                        ),
+                        const Text(
+                            'No',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
-                    RadioListTile(
-                      title: const Text('No'),
-                      value: true,
-                      groupValue: bool,
-                      onChanged: (value){
-                        // setState((){
-                        //   gender = value.toString();
-                        // });
-                      },
+                    Visibility(
+                      visible: ifAllergyRadioButton == 1,
+                      child: Column(
+                        children:  [
+                          TextFormField(
+                            style: const TextStyle(fontSize: 15),
+                            decoration: InputDecoration(
+                              hintText: 'Eg. Allergic to peanut',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: const BorderSide(
+                                    color: Colors.pink,
+                                    width: 2.0,
+                                  )
+                              ),
+                              filled: true,
+                              fillColor: const Color.fromRGBO(192, 212, 204, 1),
+                              contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                            ),
+                            //OnSaved, used to run code when user saves the form
+                            //onSaved: (String? value){},
+                            validator: (String? value){
+                              if(value == null){
+                                return "Name cannot be empty";
+                              }else if(!RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+                                return "Invalid Name format";
+                              }else {
+                                return null;
+                              }
+                            },
+                          )
+                        ],
+
+                      )
+
+
+
                     ),
                     const SizedBox(height: 7,),
                     //Have allergies or not
@@ -187,15 +289,37 @@ class consultationPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 3,),
-                    RadioListTile(
-                      title: const Text('Yes'),
-                      value: true,
-                      groupValue: bool,
-                      onChanged: (value){
-                        // setState((){
-                        //   //gender = value.toString();
-                        // });
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(height: 3,),
+                        Radio(
+                          value: 1,
+                          groupValue: ifPreExConditions,
+                          activeColor: Colors.blue,
+                          onChanged: _handlePreExCondChange,
+                        ),
+                        const Text(
+                          'Yes',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Radio(
+                          value: 2,
+                          groupValue: ifPreExConditions,
+                          activeColor: Colors.blue,
+                          onChanged: _handlePreExCondChange,
+                        ),
+                        const Text(
+                          'No',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -205,11 +329,11 @@ class consultationPage extends StatelessWidget {
                 backgroundColor: Color.fromRGBO(48, 156, 255, 1.0),
                 foregroundColor: Colors.white,
                 onPressed:(){
-                    //Do actions
+                  //Do actions
                 },
                 label: const Text('Continue  > '),
-
               ),
+              const SizedBox(height: 20,),
             ],
           ),
         ),
