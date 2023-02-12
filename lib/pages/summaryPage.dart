@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medgrab/components/bottomAppBar.dart';
 import 'package:gauges/gauges.dart';
-import 'package:flutter/gestures.dart';
-import 'package:medgrab/pages/main.dart';
 
 class summaryPage1 extends StatelessWidget {
   @override
