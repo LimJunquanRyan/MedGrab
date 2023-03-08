@@ -1,8 +1,20 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:medgrab/components/bottomAppBar.dart';
 import 'package:gauges/gauges.dart';
+import 'package:medgrab/models/Measurements.dart';
 
 class summaryPage1 extends StatelessWidget {
+  Measurements measurements = Measurements(
+    name: "Name",
+    age: 18,
+    heartRateReading: Random().nextDouble()*(220-18),
+    glucoseReading: Random().nextDouble()*500,
+    bloodPressureReading: Random().nextDouble()*220,
+    electromyographyReading: Random().nextDouble()*50,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,23 +48,25 @@ class summaryPage1 extends StatelessWidget {
                                   radius: MediaQuery.of(context).size.height * 0.1,
                                   axes: [
                                     RadialGaugeAxis(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       minValue: 0,
-                                      maxValue: 220,
+                                      maxValue: measurements.heartRateValues.max,
                                       minAngle: -150,
                                       maxAngle: 150,
                                       segments: [
-                                        RadialGaugeSegment(minValue: 0, maxValue: 50, minAngle: -150, maxAngle: -82, color: Colors.red),
-                                        RadialGaugeSegment(minValue: 50, maxValue: 170, minAngle: -82, maxAngle: 82, color: Colors.yellow),
-                                        RadialGaugeSegment(minValue: 170, maxValue: 220, minAngle: 82, maxAngle: 150, color: Colors.green),
+                                        RadialGaugeSegment(minValue: 0, maxValue: measurements.heartRateValues.lowerNormal, minAngle: -150, maxAngle: -90, color: Colors.red),
+                                        RadialGaugeSegment(minValue: measurements.heartRateValues.lowerNormal, maxValue: measurements.heartRateValues.lowerHealthy, minAngle: -90, maxAngle: -30, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.heartRateValues.lowerHealthy, maxValue: measurements.heartRateValues.upperHealthy, minAngle: -30, maxAngle: 30, color: Colors.green),
+                                        RadialGaugeSegment(minValue: measurements.heartRateValues.upperHealthy, maxValue: measurements.heartRateValues.upperNormal, minAngle: 30, maxAngle: 90, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.heartRateValues.upperNormal, maxValue: measurements.heartRateValues.max, minAngle: 90, maxAngle: 150, color: Colors.red),
                                       ],
                                       pointers: [
-                                        RadialNeedlePointer(value: 110, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
+                                        RadialNeedlePointer(value: measurements.heartRateReading, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
                                       ]
                                     ),
                                   ],
                                 ),
-                                Text("BPM", style: TextStyle(fontSize: 15),),
+                                Text("${measurements.heartRateReading} BPM", style: TextStyle(fontSize: 15),),
                               ],
                             ),
                           ),
@@ -74,23 +88,25 @@ class summaryPage1 extends StatelessWidget {
                                 radius: MediaQuery.of(context).size.height * 0.1,
                                 axes: [
                                   RadialGaugeAxis(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       minValue: 0,
-                                      maxValue: 220,
+                                      maxValue: measurements.glucoseValues.max,
                                       minAngle: -150,
                                       maxAngle: 150,
                                       segments: [
-                                        RadialGaugeSegment(minValue: 0, maxValue: 50, minAngle: -150, maxAngle: -82, color: Colors.red),
-                                        RadialGaugeSegment(minValue: 50, maxValue: 170, minAngle: -82, maxAngle: 82, color: Colors.yellow),
-                                        RadialGaugeSegment(minValue: 170, maxValue: 220, minAngle: 82, maxAngle: 150, color: Colors.green),
+                                        RadialGaugeSegment(minValue: 0, maxValue: measurements.glucoseValues.lowerNormal, minAngle: -150, maxAngle: -90, color: Colors.red),
+                                        RadialGaugeSegment(minValue: measurements.glucoseValues.lowerNormal, maxValue: measurements.glucoseValues.lowerHealthy, minAngle: -90, maxAngle: -30, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.glucoseValues.lowerHealthy, maxValue: measurements.glucoseValues.upperHealthy, minAngle: -30, maxAngle: 30, color: Colors.green),
+                                        RadialGaugeSegment(minValue: measurements.glucoseValues.upperHealthy, maxValue: measurements.glucoseValues.upperNormal, minAngle: 30, maxAngle: 90, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.glucoseValues.upperNormal, maxValue: measurements.glucoseValues.max, minAngle: 90, maxAngle: 150, color: Colors.red),
                                       ],
                                       pointers: [
-                                        RadialNeedlePointer(value: 110, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
+                                        RadialNeedlePointer(value: measurements.glucoseReading, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
                                       ]
                                   ),
                                 ],
                               ),
-                              Text("mg/DL", style: TextStyle(fontSize: 15),),
+                              Text("${measurements.glucoseReading} mg/DL", style: TextStyle(fontSize: 15),),
                             ],
                           ),
                         ),
@@ -112,23 +128,25 @@ class summaryPage1 extends StatelessWidget {
                                 radius: MediaQuery.of(context).size.height * 0.1,
                                 axes: [
                                   RadialGaugeAxis(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       minValue: 0,
-                                      maxValue: 220,
+                                      maxValue: measurements.bloodPressureValues.max,
                                       minAngle: -150,
                                       maxAngle: 150,
                                       segments: [
-                                        RadialGaugeSegment(minValue: 0, maxValue: 50, minAngle: -150, maxAngle: -82, color: Colors.red),
-                                        RadialGaugeSegment(minValue: 50, maxValue: 170, minAngle: -82, maxAngle: 82, color: Colors.yellow),
-                                        RadialGaugeSegment(minValue: 170, maxValue: 220, minAngle: 82, maxAngle: 150, color: Colors.green),
+                                        RadialGaugeSegment(minValue: 0, maxValue: measurements.bloodPressureValues.lowerNormal, minAngle: -150, maxAngle: -90, color: Colors.red),
+                                        RadialGaugeSegment(minValue: measurements.bloodPressureValues.lowerNormal, maxValue: measurements.bloodPressureValues.lowerHealthy, minAngle: -90, maxAngle: -30, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.bloodPressureValues.lowerHealthy, maxValue: measurements.bloodPressureValues.upperHealthy, minAngle: -30, maxAngle: 30, color: Colors.green),
+                                        RadialGaugeSegment(minValue: measurements.bloodPressureValues.upperHealthy, maxValue: measurements.bloodPressureValues.upperNormal, minAngle: 30, maxAngle: 90, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.bloodPressureValues.upperNormal, maxValue: measurements.bloodPressureValues.max, minAngle: 90, maxAngle: 150, color: Colors.red),
                                       ],
                                       pointers: [
-                                        RadialNeedlePointer(value: 110, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
+                                        RadialNeedlePointer(value: measurements.bloodPressureReading, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
                                       ]
                                   ),
                                 ],
                               ),
-                              Text("mmHg", style: TextStyle(fontSize: 15),),
+                              Text("${measurements.bloodPressureReading} mmHg", style: TextStyle(fontSize: 15),),
                             ],
                           ),
                         ),
@@ -150,23 +168,25 @@ class summaryPage1 extends StatelessWidget {
                                 radius: MediaQuery.of(context).size.height * 0.1,
                                 axes: [
                                   RadialGaugeAxis(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       minValue: 0,
-                                      maxValue: 220,
+                                      maxValue: measurements.electromyographyValues.max,
                                       minAngle: -150,
                                       maxAngle: 150,
                                       segments: [
-                                        RadialGaugeSegment(minValue: 0, maxValue: 50, minAngle: -150, maxAngle: -82, color: Colors.red),
-                                        RadialGaugeSegment(minValue: 50, maxValue: 170, minAngle: -82, maxAngle: 82, color: Colors.yellow),
-                                        RadialGaugeSegment(minValue: 170, maxValue: 220, minAngle: 82, maxAngle: 150, color: Colors.green),
+                                        RadialGaugeSegment(minValue: 0, maxValue: measurements.electromyographyValues.lowerNormal, minAngle: -150, maxAngle: -90, color: Colors.red),
+                                        RadialGaugeSegment(minValue: measurements.electromyographyValues.lowerNormal, maxValue: measurements.electromyographyValues.lowerHealthy, minAngle: -90, maxAngle: -30, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.electromyographyValues.lowerHealthy, maxValue: measurements.electromyographyValues.upperHealthy, minAngle: -30, maxAngle: 30, color: Colors.green),
+                                        RadialGaugeSegment(minValue: measurements.electromyographyValues.upperHealthy, maxValue: measurements.electromyographyValues.upperNormal, minAngle: 30, maxAngle: 90, color: Colors.yellow),
+                                        RadialGaugeSegment(minValue: measurements.electromyographyValues.upperNormal, maxValue: measurements.electromyographyValues.max, minAngle: 90, maxAngle: 150, color: Colors.red),
                                       ],
                                       pointers: [
-                                        RadialNeedlePointer(value: 110, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
+                                        RadialNeedlePointer(value: measurements.electromyographyReading, length: 0.6, knobRadiusAbsolute: 0, thickness: 2)
                                       ]
                                   ),
                                 ],
                               ),
-                              Text("m/s", style: TextStyle(fontSize: 15),),
+                              Text("${measurements.electromyographyReading} m/s", style: TextStyle(fontSize: 15),),
                             ],
                           ),
                         ),
